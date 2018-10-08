@@ -13,7 +13,7 @@ pipeline {
                                 echo.> test.txt
                                 git add test.txt
                                 git commit -m "test push"
-                                git push origin test
+                                git push test
                                 '''
                     
 
