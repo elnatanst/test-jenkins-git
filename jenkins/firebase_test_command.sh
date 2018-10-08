@@ -1,0 +1,1 @@
+gcloud firebase test android run --type robo --app ../app/build/outputs/apk/debug/app-debug.apk --device model=Nexus6P,version=23,locale=en,orientation=portrait --robo-directives AL_phone=0508122291,AL_password=123456 --timeout 10m
