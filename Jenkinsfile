@@ -1,11 +1,15 @@
 pipeline {
-    agent { label 'win-appium-slave' }
+    agent { label 'UbuntuSlave' }
     stages {
         
         stage('pull from master'){
             steps{
                 script{
-                    bat '''
+
+                    sh "/opt/android-sdk-linux/tools/emulator -avd Nexus_5_API_24 -no-window"
+                    sh "adb devices"
+
+                    sh '''
                                 git fetch origin
                                 git branch
                                 git checkout -b test
@@ -29,7 +33,7 @@ pipeline {
             steps {
                 script{
                     if(env.RUN_LINT_TEST == 'true'){
-                bat '''
+                sh '''
             gradlew lint
 
             '''
@@ -41,7 +45,7 @@ pipeline {
             steps {
                 script{
                     if(env.RUN_SONARQUBE == 'true'){
-                bat '''
+                sh '''
             
             gradlew sonarqube
 
@@ -54,7 +58,7 @@ pipeline {
             steps {
                 script{
                     if(env.MAKE_DEBUG_APK == 'true'){
-                bat '''
+                sh '''
             
             gradlew assembleDebug
             '''
@@ -68,7 +72,7 @@ pipeline {
                     if(env.MAKE_RELEASE_APK == 'true'){
                         
                         
-                bat '''
+                sh '''
             
             gradlew assembleRelease
             '''
@@ -99,10 +103,10 @@ pipeline {
                        if(env.PUBLISH_TO_NEXUS == 'true'){
                            
                            
-                            def app_version = bat(script: '/usr/bin/python3 jenkins/get_version_from_apk.py -file=app/build/outputs/apk/debug/app-debug.apk',returnStdout: true)
-                            bat "echo ${app_version}"
-                            bat(script: "/usr/bin/python3 jenkins/nexus_archive_artifacts.py --file=app/build/outputs/apk/debug/app-debug.apk --artId=${NEXUS_GROUPID}-debug --v=${app_version}")
-                            bat(script: "/usr/bin/python3 jenkins/nexus_archive_artifacts.py --file=app/build/outputs/apk/release/app-release-unsigned.apk --artId=${NEXUS_GROUPID}-release --v=${app_version}")
+                            def app_version = sh(script: '/usr/bin/python3 jenkins/get_version_from_apk.py -file=app/build/outputs/apk/debug/app-debug.apk',returnStdout: true)
+                            sh "echo ${app_version}"
+                            sh(script: "/usr/bin/python3 jenkins/nexus_archive_artifacts.py --file=app/build/outputs/apk/debug/app-debug.apk --artId=${NEXUS_GROUPID}-debug --v=${app_version}")
+                            sh(script: "/usr/bin/python3 jenkins/nexus_archive_artifacts.py --file=app/build/outputs/apk/release/app-release-unsigned.apk --artId=${NEXUS_GROUPID}-release --v=${app_version}")
                             
 
                        } 
