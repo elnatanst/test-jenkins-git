@@ -20,7 +20,6 @@ pipeline {
                                 git push test
                                 '''
                     
-                    
             }
             }
 
