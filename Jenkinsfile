@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage ('Checkout'){
             steps{
-        git branch: 'test-hook', url: 'git@github.com:elnatanst/test-jenkins-git.git'
+        git branches: [[name: 'refs/head/*']], url: 'git@github.com:elnatanst/test-jenkins-git.git'
             }
     }
         
