@@ -5,14 +5,6 @@ pipeline {
     stages {
         stage ('Checkout'){
             steps{
-        //         checkout([
-        //     $class: 'GitSCM',
-        //     branches: scm.branches,
-        //     extensions: scm.extensions + [[$class: 'LocalBranch'], [$class: 'WipeWorkspace']],
-        //     userRemoteConfigs: [[credentialsId: 'f6518de0-52e6-4f88-8880-ec7b7216224c', url: 'git@github.com:elnatanst/test-jenkins-git.git']],
-        //     doGenerateSubmoduleConfigurations: false
-        // ])
-
 
         git branch: master, url: 'git@github.com:elnatanst/test-jenkins-git.git'
             }
