@@ -4,7 +4,9 @@ pipeline {
     agent { label 'win-appium-slave' }
     stages {
         stage ('Checkout'){
+            steps{
         git branch: 'test-hook', url: 'git@github.com:elnatanst/test-jenkins-git.git'
+            }
     }
         
         stage('pull from master'){
