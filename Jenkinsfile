@@ -9,6 +9,7 @@ pipeline {
                     bat "C:\\Users\\appium\\AppData\\Local\\Android\\Sdk\\tools\\emulator -avd Pixel_XL_API_26 -no-window"
                     bat "adb devices"
 
+
                     bat '''
                                 git fetch origin
                                 git branch
