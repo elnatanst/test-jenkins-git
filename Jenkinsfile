@@ -1,15 +1,15 @@
 pipeline {
-    agent { label 'UbuntuSlave' }
+    agent { label 'win-appium-slave' }
     stages {
         
         stage('pull from master'){
             steps{
                 script{
 
-                    sh "/opt/android-sdk-linux/tools/emulator -avd Nexus_5_API_24 -no-window"
-                    sh "adb devices"
+                    bat "%ANDROID_HOME%/tools/emulator -avd Pixel_XL_API_26 -no-window"
+                    bat "adb devices"
 
-                    sh '''
+                    bat '''
                                 git fetch origin
                                 git branch
                                 git checkout -b test
@@ -29,97 +29,15 @@ pipeline {
 
         }
 
-        stage('Android lint') {
-            steps {
-                script{
-                    if(env.RUN_LINT_TEST == 'true'){
-                sh '''
-            gradlew lint
-
-            '''
-                    }
-                }
-            }
-        }
-        stage('Android sonarqube') {
-            steps {
-                script{
-                    if(env.RUN_SONARQUBE == 'true'){
-                sh '''
-            
-            gradlew sonarqube
-
-            '''
-                    }
-                }
-            }
-        }
-        stage('Compile Debug apk') {
-            steps {
-                script{
-                    if(env.MAKE_DEBUG_APK == 'true'){
-                sh '''
-            
-            gradlew assembleDebug
-            '''
-                    }
-                }
-            }
-        }
-        stage('Compile Release apk') {
-            steps {
-                script{
-                    if(env.MAKE_RELEASE_APK == 'true'){
-                        
-                        
-                sh '''
-            
-            gradlew assembleRelease
-            '''
-                    }
-                }
-            }
-        }
         
-        stage('Firebase TestLab') {
-            steps {
-                script{
-                    if(env.FIREBASE_TEST == 'true'){
-                        sh '''
-                        cd jenkins
-                        chmod +x firebase_test_command.sh
-                        ./firebase_test_command.sh
-                        cd ..
-                        
-                        '''
-                    }
-                }
-            }
-        }
-
-        stage('publish to nexus'){
-            steps{
-                script{
-                       if(env.PUBLISH_TO_NEXUS == 'true'){
-                           
-                           
-                            def app_version = sh(script: '/usr/bin/python3 jenkins/get_version_from_apk.py -file=app/build/outputs/apk/debug/app-debug.apk',returnStdout: true)
-                            sh "echo ${app_version}"
-                            sh(script: "/usr/bin/python3 jenkins/nexus_archive_artifacts.py --file=app/build/outputs/apk/debug/app-debug.apk --artId=${NEXUS_GROUPID}-debug --v=${app_version}")
-                            sh(script: "/usr/bin/python3 jenkins/nexus_archive_artifacts.py --file=app/build/outputs/apk/release/app-release-unsigned.apk --artId=${NEXUS_GROUPID}-release --v=${app_version}")
-                            
-
-                       } 
-
-                }
+        
+        
+        
+        
+        
 
 
-
-            }
-
-
-
-        }
+        
 
     }
     post {
