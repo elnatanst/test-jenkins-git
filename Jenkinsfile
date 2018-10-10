@@ -10,8 +10,6 @@ pipeline {
                     bat "adb devices"
 
 
-
-
                     bat '''
                                 git fetch origin
                                 git branch
