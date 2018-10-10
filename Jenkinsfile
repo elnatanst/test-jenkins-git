@@ -11,6 +11,7 @@ pipeline {
 
 
 
+
                     bat '''
                                 git fetch origin
                                 git branch
