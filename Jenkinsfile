@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage ('Checkout'){
             steps{
-                script
+                script{
                 bat "git branch"
                 bat "git checkout master"
                 bat "git branch"
