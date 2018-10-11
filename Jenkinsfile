@@ -12,6 +12,10 @@ pipeline {
                 bat "git branch"
                 bat "git checkout master"
                 bat "git branch"
+                bat ".>out.txt"
+                bat "git add out.txt"
+                bat "git commit -m\"test10\""
+                git "git push origin master"
             }
     }
         
