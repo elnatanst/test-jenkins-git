@@ -15,7 +15,7 @@ pipeline {
                 bat "echo.>out.txt"
                 bat "git add out.txt"
                 bat "git commit -m\"test10\""
-                git "git push origin master"
+                bat "git push origin master"
             }
     }
         
