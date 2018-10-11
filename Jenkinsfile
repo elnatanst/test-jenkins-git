@@ -53,6 +53,10 @@ pipeline {
     }
     post {
         always {
+            step([$class           : 'Mailer',
+                  recipients       : "elnatan@ravtech.co.il",
+                  sendToIndividuals: false])
+            deleteDir()
             
             deleteDir()
         }
