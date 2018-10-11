@@ -13,6 +13,7 @@ pipeline {
                 bat 'git checkout master'
                 bat 'git branch'
                 bat 'git pull origin master'
+                
 
             }
     }
