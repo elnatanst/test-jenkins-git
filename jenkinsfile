@@ -9,7 +9,7 @@ pipeline {
         stage ('Checkout'){
             steps{
 
-        git branch: "test-hook", url: 'git@github.com:elnatanst/test-jenkins-git.git'
+                sh'git branch'
             }
     }
         
