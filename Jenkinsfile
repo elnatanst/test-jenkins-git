@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage ('Checkout'){
             steps{
-
+                script
                 bat "git branch"
                 bat "git checkout master"
                 bat "git branch"
@@ -20,6 +20,7 @@ pipeline {
                 returnStdout: true).trim()
                 echo "Git committer email: ${GIT_COMMIT_EMAIL}"
                 bat "git push origin master"
+            }
             }
     }
         
