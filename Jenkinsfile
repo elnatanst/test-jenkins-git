@@ -2,6 +2,7 @@ properties([pipelineTriggers([githubPush()])])
 
 
 
+
 pipeline {
     agent { label 'win-appium-slave' }
     stages {
