@@ -20,6 +20,11 @@ pipeline {
         stage('pull from master'){
             steps{
                 script{
+                    bat 'git branch'
+                    bat 'git checkout master'
+                    bat 'git branch'
+                    bat 'git pull origin master'
+
                     bat "git branch"
                     bat "C:\\Users\\appium\\AppData\\Local\\Android\\Sdk\\tools\\emulator -avd Pixel_XL_API_26 -no-window"
                     bat "adb devices"
