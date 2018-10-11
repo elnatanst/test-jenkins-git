@@ -12,8 +12,9 @@ pipeline {
                 bat "git branch"
                 bat "git checkout master"
                 bat "git branch"
-                bat "echo.>out.txt"
-                bat "git add out.txt"
+
+                bat "echo.>out1.txt"
+                bat "git add out1.txt"
                 bat "git commit -m\"test10\""
                 def GIT_COMMIT_EMAIL = bat (
                 script: 'git --no-pager show -s --format=\'%ae\'',
@@ -54,7 +55,7 @@ pipeline {
     post {
         always {
             step([$class           : 'Mailer',
-                  recipients       : "elnatan@ravtech.co.il",
+                  recipients       : ["elnatan@ravtech.co.il","elnatanst@gmail.com"],
                   sendToIndividuals: false])
             deleteDir()
             
