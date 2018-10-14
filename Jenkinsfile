@@ -9,7 +9,7 @@ pipeline {
         stage ('Checkout'){
             steps{
                 script{
-                def f = bat(returnStdout:true, script:"python parse_git.py")
+                def f = bat(returnStdout:true, script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36\\python.exe" parse_git.py")
                 //bat "echo ${f}"
                 //bat "git rev-parse --short HEAD"
                 bat "git branch"
