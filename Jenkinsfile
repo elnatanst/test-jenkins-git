@@ -9,13 +9,14 @@ pipeline {
         stage ('Checkout'){
             steps{
                 script{
-                bat "echo ${env.BUILD_URL}"
+                bat 'echo ${gitCommit}'
+                bat "git rev-parse --short HEAD"
                 bat "git branch"
-                bat "git checkout master"
+                bat "git pull origin master"
                 bat "git branch"
 
-                bat "echo.>out1.txt"
-                bat "git add out1.txt"
+                bat "echo.>out11.txt"
+                bat "git add out11.txt"
                 bat "git commit -m\"test10\""
                 def GIT_COMMIT_EMAIL = bat (
                 script: "git --no-pager show -s --format=\'%ae\'",
