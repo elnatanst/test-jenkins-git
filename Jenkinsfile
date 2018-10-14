@@ -12,6 +12,7 @@ pipeline {
         stage ('Checkout'){
             steps{
                 script{
+                bat "git branch"
                 env.author_email = bat(returnStdout:true, script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36\\python.exe parse_git.py")
                 //bat "echo ${f}"
                 //bat "git rev-parse --short HEAD"
