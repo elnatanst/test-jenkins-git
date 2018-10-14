@@ -10,7 +10,7 @@ pipeline {
             steps{
                 script{
                 bat 'echo ${gitCommit}'
-                bat "git rev-parse --short HEAD"
+                //bat "git rev-parse --short HEAD"
                 bat "git branch"
                 bat "git pull origin master"
                 bat "git branch"
