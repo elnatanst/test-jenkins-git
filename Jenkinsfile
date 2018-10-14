@@ -58,10 +58,11 @@ pipeline {
     }
     post {
         always {
-            step([$class           : 'Mailer',
-                  recipients       : ["elnatan@ravtech.co.il","elnatanst@gmail.com"],
-                  sendToIndividuals: false])
-            deleteDir()
+            script{
+
+                emailext attachLog: true, body: "${env.JOB_NAME}: ${currentBuild.result} ${BUILD_URL} ${REPO}", compressLog: false, replyTo: 'admin@ravtech.co.il', recipientProviders: [developers()], subject: "Jenkins Job Notification: ${JOB_NAME} - Build#${BUILD_NUMBER} ${currentBuild.result}", to: 'elnatn@ravtech.co.il' 
+            }
+            
             
             deleteDir()
         }
