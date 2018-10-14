@@ -9,7 +9,7 @@ pipeline {
         stage ('Checkout'){
             steps{
                 script{
-                bat 'echo ${gitCommit}'
+                bat "git --no-pager show -s --format=%ae"
                 //bat "git rev-parse --short HEAD"
                 bat "git branch"
                 bat "git pull origin master"
