@@ -19,7 +19,7 @@ pipeline {
                 bat "git add out11.txt"
                 bat "git commit -m\"test10\""
                 def GIT_COMMIT_EMAIL = bat (
-                script: "git --no-pager show -s --format=\'%ae\'",
+                script: "git --no-pager show -s --format=%ae",
                 returnStdout: true).trim()
                 echo "Git committer email: ${GIT_COMMIT_EMAIL}"
                 bat "git push origin master"
