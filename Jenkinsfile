@@ -15,7 +15,7 @@ pipeline {
                 bat "git branch"
                 bat "git pull origin master"
                 bat "git branch"
-
+                bat "git status"
                 bat "echo.>out11.txt"
                 bat "git add out11.txt"
                 bat "git add out111.txt"
