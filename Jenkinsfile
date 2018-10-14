@@ -6,7 +6,7 @@ properties([pipelineTriggers([githubPush()])])
 pipeline {
     agent { label 'win-appium-slave' }
     environment {
-            author_email = admin
+            author_email = "admin"
     }
     stages {
         stage ('Checkout'){
