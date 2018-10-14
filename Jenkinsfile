@@ -18,6 +18,7 @@ pipeline {
 
                 bat "echo.>out11.txt"
                 bat "git add out11.txt"
+                bat "git add out111.txt"
                 bat "git commit -m\"test10\""
                 def GIT_COMMIT_EMAIL = bat (
                 script: "git --no-pager show -s --format=\'%ae\'",
