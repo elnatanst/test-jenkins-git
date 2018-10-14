@@ -9,7 +9,8 @@ pipeline {
         stage ('Checkout'){
             steps{
                 script{
-                bat "git --no-pager show -s --format=\%aE"
+                def f = bat(returnStdout:true, script:"python parse_git.py")
+                bat "echo $f"
                 //bat "git rev-parse --short HEAD"
                 bat "git branch"
                 bat "git pull origin master"
