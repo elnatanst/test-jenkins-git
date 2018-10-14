@@ -5,11 +5,14 @@ properties([pipelineTriggers([githubPush()])])
 
 pipeline {
     agent { label 'win-appium-slave' }
+    environment {
+            author_email = admin
+    }
     stages {
         stage ('Checkout'){
             steps{
                 script{
-                def f = bat(returnStdout:true, script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36\\python.exe parse_git.py")
+                env.author_email = bat(returnStdout:true, script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36\\python.exe parse_git.py")
                 //bat "echo ${f}"
                 //bat "git rev-parse --short HEAD"
                 bat "git branch"
@@ -20,10 +23,8 @@ pipeline {
                 bat "git add out11.txt"
                 bat "git add out111.txt"
                 bat "git commit -m\"test10\""
-                def GIT_COMMIT_EMAIL = bat (
-                script: "git --no-pager show -s --format=\'%ae\'",
-                returnStdout: true).trim()
-                echo "Git committer email: ${GIT_COMMIT_EMAIL}"
+                
+                echo "Git committer email: ${env.author_email}"
                 bat "git push origin master"
             }
             }
