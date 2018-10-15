@@ -71,7 +71,7 @@ pipeline {
             }
             
             
-            deleteDir()
+            // deleteDir()
         }
         success {
 
