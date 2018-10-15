@@ -12,20 +12,22 @@ pipeline {
         stage ('Checkout'){
             steps{
                 script{
+                bat "echo ${env.BRANCH_NAME}"
                 bat "git branch"
-                env.author_email = bat(returnStdout:true, script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36\\python.exe parse_git.py")
-                //bat "echo ${f}"
-                //bat "git rev-parse --short HEAD"
-                bat "git branch"
+                def out = bat(returnStdout:true, script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36\\python.exe parse_git.py")
+                bat "echo ${out}"
+                
+                
                 bat "git pull origin master"
-                bat "git branch"
-                bat "git status"
-                bat "echo.>out11.txt"
-                bat "git add out11.txt"
-                bat "git add out111.txt"
+                bat "git checkout master"
+
+                // bat "git status"
+                // bat "echo.>out11.txt"
+                // bat "git add out11.txt"
+                // bat "git add out111.txt"
                 bat "git commit -m\"test10\""
                 
-                echo "Git committer email: ${env.author_email}"
+                // echo "Git committer email: ${env.author_email}"
                 bat "git push origin master"
             }
             }
