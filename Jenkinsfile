@@ -67,7 +67,7 @@ pipeline {
         always {
             script{
 
-                emailext attachLog: true, body: "${env.JOB_NAME}: ${currentBuild.result} ${BUILD_URL}", compressLog: false, replyTo: 'admin@ravtech.co.il', recipientProviders: [developers()], subject: "Jenkins Job Notification: ${JOB_NAME} - Build#${BUILD_NUMBER} ${currentBuild.result}", to: 'elnatn@ravtech.co.il' 
+                emailext attachLog: true, body: "${env.JOB_NAME}: ${currentBuild.result} ${BUILD_URL}", compressLog: false, replyTo: "${email}", recipientProviders: [developers()], subject: "Jenkins Job Notification: ${JOB_NAME} - Build#${BUILD_NUMBER} ${currentBuild.result}", to: 'elnatn@ravtech.co.il' 
             }
             
             
