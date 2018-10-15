@@ -1,14 +1,45 @@
 properties([pipelineTriggers([githubPush()])])
 
+def author_email
 
 
 pipeline {
+    // environment {
+    //         // author_email = ""
+    // }
     agent { label 'win-appium-slave' }
+    
     stages {
         stage ('Checkout'){
             steps{
+                script{
 
-        git branch: "test-hook", url: 'git@github.com:elnatanst/test-jenkins-git.git'
+                bat 'set > env.txt' 
+                for (String i : readFile('env.txt').split("\r?\n")) {
+                    println i
+                }
+                bat "git rev-parse --abbrev-ref HEAD"
+                bat "git branch"
+                bat "echo ${GIT_BRANCH}"
+                bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py >out.txt", returnStdout: true)
+                author_email = readFile('out.txt').trim()
+                // sleep(10)
+                bat "del out.txt"
+                bat "echo ${author_email}"
+                
+                
+                bat "git pull origin master"
+                bat "git checkout master"
+
+                // bat "git status"
+                bat "echo.>out11.txt"
+                bat "git add out11.txt"
+                // bat "git add out111.txt"
+                bat "git commit -m\"test10\""
+                
+                // echo "Git committer email: ${env.author_email}"
+                bat "git push origin master"
+            }
             }
     }
         
@@ -41,6 +72,11 @@ pipeline {
     }
     post {
         always {
+            script{
+
+                emailext attachLog: true, body: "${env.JOB_NAME}: ${currentBuild.result} ${BUILD_URL}", compressLog: false, replyTo: "${author_email}", recipientProviders: [developers()], subject: "Jenkins Job Notification: ${JOB_NAME} - Build#${BUILD_NUMBER} ${currentBuild.result}", to: 'elnatn@ravtech.co.il' 
+            }
+            
             
             deleteDir()
         }
