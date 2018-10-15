@@ -14,7 +14,7 @@ pipeline {
                 script{
                 bat "git rev-parse --abbrev-ref HEAD"
                 bat "git branch"
-                def out = bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36\\python.exe parse_git.py",returnStdout:true)
+                def out = bat "C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36\\python.exe parse_git.py"
                 
                 bat "echo ${out}"
                 
