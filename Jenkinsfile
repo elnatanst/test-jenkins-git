@@ -12,7 +12,7 @@ pipeline {
         stage ('Checkout'){
             steps{
                 script{
-                bat "git rev-parse --abbrev-ref HEAD"
+                // bat "git rev-parse --abbrev-ref HEAD"
                 // bat "git branch"
                 def out = bat(returnStdout:true, script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36\\python.exe parse_git.py")
                 
