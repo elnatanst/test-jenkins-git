@@ -16,7 +16,7 @@ pipeline {
                 bat "git branch"
                 env.author_email = bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py", returnStdout: true)
                 sleep(10)
-                bat "echo $OUT"
+                // bat "echo $OUT"
                 bat "echo ${env.author_email}"
                 
                 
