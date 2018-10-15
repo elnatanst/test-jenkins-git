@@ -14,10 +14,10 @@ pipeline {
                 script{
                 bat "git rev-parse --abbrev-ref HEAD"
                 bat "git branch"
-                bat "C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py"
+                def out = bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py", returnStdout: true)
                 sleep(10)
                 
-                bat "echo ${out}"
+                bat "echo ${env.out}"
                 
                 
                 bat "git pull origin master"
