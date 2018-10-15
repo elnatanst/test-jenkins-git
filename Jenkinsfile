@@ -14,7 +14,7 @@ pipeline {
                 script{
                 bat "git rev-parse --abbrev-ref HEAD"
                 bat "git branch"
-                bat "python.exe parse_git.py"
+                bat "python.exe try.py"
                 
                 bat "echo ${out}"
                 
