@@ -15,7 +15,7 @@ pipeline {
                 bat "echo ${env.BRANCH_NAME}"
                 bat "git branch"
                 def out = bat(returnStdout:true, script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36\\python.exe parse_git.py")
-                sleep 10
+                sleep 1
                 bat "echo ${out}"
                 
                 
