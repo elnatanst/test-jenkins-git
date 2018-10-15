@@ -15,10 +15,10 @@ pipeline {
                 bat "git rev-parse --abbrev-ref HEAD"
                 bat "git branch"
                 bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py >out.txt", returnStdout: true)
-                env.author_email = readFile('out.txt').trim()
+                def email = readFile('out.txt').trim()
                 // sleep(10)
-                // bat "echo $OUT"
-                bat "echo ${env.author_email}"
+                
+                bat "echo ${email}"
                 
                 
                 bat "git pull origin master"
@@ -71,7 +71,7 @@ pipeline {
             }
             
             
-            // deleteDir()
+            deleteDir()
         }
         success {
 
