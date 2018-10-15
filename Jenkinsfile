@@ -4,9 +4,9 @@ def author_email
 
 
 pipeline {
-    environment {
-            // author_email = ""
-    }
+    // environment {
+    //         // author_email = ""
+    // }
     agent { label 'win-appium-slave' }
     
     stages {
