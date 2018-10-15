@@ -30,6 +30,7 @@ pipeline {
                 
                 bat "git pull origin master"
                 bat "git checkout master"
+
                 
 
                 // bat "git status"
