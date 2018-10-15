@@ -13,6 +13,10 @@ pipeline {
         stage ('Checkout'){
             steps{
                 script{
+                bat 'set > env.txt' 
+                for (String i : readFile('env.txt').split("\r?\n")) {
+                    println i
+                }
                 bat "git rev-parse --abbrev-ref HEAD"
                 bat "git branch"
                 bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py >out.txt", returnStdout: true)
