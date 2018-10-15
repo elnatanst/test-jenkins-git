@@ -4,10 +4,11 @@ properties([pipelineTriggers([githubPush()])])
 
 
 pipeline {
-    agent { label 'win-appium-slave' }
     environment {
-            author_email = "admin"
+            author_email = ""
     }
+    agent { label 'win-appium-slave' }
+    
     stages {
         stage ('Checkout'){
             steps{
@@ -15,10 +16,10 @@ pipeline {
                 bat "git rev-parse --abbrev-ref HEAD"
                 bat "git branch"
                 bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py >out.txt", returnStdout: true)
-                def email = readFile('out.txt').trim()
+                env.author_email = readFile('out.txt').trim()
                 // sleep(10)
                 
-                bat "echo ${email}"
+                bat "echo ${env.author_email}"
                 
                 
                 bat "git pull origin master"
@@ -67,7 +68,7 @@ pipeline {
         always {
             script{
 
-                emailext attachLog: true, body: "${env.JOB_NAME}: ${currentBuild.result} ${BUILD_URL}", compressLog: false, replyTo: "${email}", recipientProviders: [developers()], subject: "Jenkins Job Notification: ${JOB_NAME} - Build#${BUILD_NUMBER} ${currentBuild.result}", to: 'elnatn@ravtech.co.il' 
+                emailext attachLog: true, body: "${env.JOB_NAME}: ${currentBuild.result} ${BUILD_URL}", compressLog: false, replyTo: "${env.author_email}", recipientProviders: [developers()], subject: "Jenkins Job Notification: ${JOB_NAME} - Build#${BUILD_NUMBER} ${currentBuild.result}", to: 'elnatn@ravtech.co.il' 
             }
             
             
