@@ -19,7 +19,7 @@ pipeline {
                     println i
                 }
                 
-                bat "git branch"
+                bat "git fetch origin"
                 bat "echo ${GIT_BRANCH}"
                 bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py >out.txt", returnStdout: true)
                 author_email = readFile('out.txt').trim()
@@ -27,9 +27,9 @@ pipeline {
                 bat "del out.txt"
                 bat "echo ${author_email}"
                 
-                
+                bat "git checkout ${GIT_BRANCH}"
                 bat "git pull origin master"
-                bat "git checkout master"
+                
 
                 
 
