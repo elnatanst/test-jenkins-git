@@ -23,8 +23,6 @@ pipeline {
                 bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py >out.txt", returnStdout: true)
                 author_email = readFile('out.txt').trim()
                 bat "del out.txt"
-
-                
                 bat "echo ${author_email}"
                 
                 bat "git pull origin master"
