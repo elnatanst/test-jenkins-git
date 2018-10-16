@@ -19,17 +19,17 @@ pipeline {
                     println i
                 }
                 
-                bat "git branch"
+                bat "git fetch origin"
                 bat "echo ${GIT_BRANCH}"
                 bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py >out.txt", returnStdout: true)
                 author_email = readFile('out.txt').trim()
-                // sleep(10)
                 bat "del out.txt"
                 bat "echo ${author_email}"
                 
-                
+                bat "git checkout ${GIT_BRANCH}"
                 bat "git pull origin master"
-                bat "git checkout master"
+                
+
                 
 
                 // bat "git status"
@@ -75,7 +75,7 @@ pipeline {
         always {
             script{
 
-                emailext attachLog: true, body: "${env.JOB_NAME}: ${currentBuild.result} ${BUILD_URL}", compressLog: false, replyTo: "${author_email}", recipientProviders: [developers()], subject: "Jenkins Job Notification: ${JOB_NAME} - Build#${BUILD_NUMBER} ${currentBuild.result}", to: 'elnatn@ravtech.co.il' 
+                emailext attachLog: true, body: "${env.JOB_NAME}: ${currentBuild.result} ${JOB_DISPLAY_URL}", compressLog: false, replyTo: "${author_email}", recipientProviders: [developers()], subject: "Jenkins Job Notification: ${JOB_NAME} - Build#${BUILD_NUMBER} ${currentBuild.result}", to: 'elnatn@ravtech.co.il' 
             }
             
             
