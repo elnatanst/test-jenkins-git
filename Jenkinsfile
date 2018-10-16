@@ -23,7 +23,6 @@ pipeline {
                 bat "echo ${GIT_BRANCH}"
                 bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py >out.txt", returnStdout: true)
                 author_email = readFile('out.txt').trim()
-                // sleep(10)
                 bat "del out.txt"
                 bat "echo ${author_email}"
                 
