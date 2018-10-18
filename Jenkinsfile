@@ -24,8 +24,7 @@ pipeline {
                 if (env.GIT_BRANCH.contains("hook")){
                     println "if success"
                 }
-                bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py >out.txt", returnStdout: true)
-                author_email = readFile('out.txt').trim()
+                 
                 bat "del out.txt"
                 bat "echo ${author_email}"
                 
@@ -74,7 +73,7 @@ pipeline {
         always {
             script{
 
-                emailext attachLog: true, body: "${env.JOB_NAME}: ${currentBuild.result} ${JOB_DISPLAY_URL}", compressLog: false, replyTo: "${author_email}", recipientProviders: [developers()], subject: "Jenkins Job Notification: ${JOB_NAME} - Build#${BUILD_NUMBER} ${currentBuild.result}", to: 'elnatn@ravtech.co.il' 
+                emailext attachLog: true, body: "${env.JOB_NAME}: ${currentBuild.result} ${RUN_DISPLAY_URL}", compressLog: false, replyTo: "${author_email}", recipientProviders: [developers()], subject: "Jenkins Job Notification: ${JOB_NAME} - Build#${BUILD_NUMBER} ${currentBuild.result}", to: 'elnatanst@gmail.com' 
             }
             
             
