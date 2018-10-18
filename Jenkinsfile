@@ -20,6 +20,10 @@ pipeline {
                 }
                 
                 bat "echo ${GIT_BRANCH}"
+                def c_branch = "${GIT_BRANCH}""
+                if (c_branch.contains("hook")){
+                    println "if success"
+                }
                 bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py >out.txt", returnStdout: true)
                 author_email = readFile('out.txt').trim()
                 bat "del out.txt"
