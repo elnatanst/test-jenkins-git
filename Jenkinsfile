@@ -20,7 +20,7 @@ pipeline {
                 }
                 
                 bat "echo ${GIT_BRANCH}"
-                def c_branch = ${GIT_BRANCH}
+                def c_branch = "${GIT_BRANCH}""
                 if (c_branch.contains("hook")){
                     println "if success"
                 }
