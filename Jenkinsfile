@@ -20,8 +20,8 @@ pipeline {
                 }
                 
                 bat "echo ${GIT_BRANCH}"
-                def c_branch = "${GIT_BRANCH}""
-                if (c_branch.contains("hook")){
+                // def c_branch = "${GIT_BRANCH}""
+                if (env.GIT_BRANCH.contains("hook")){
                     println "if success"
                 }
                 bat(script:"C:\\Users\\appium\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe parse_git.py >out.txt", returnStdout: true)
